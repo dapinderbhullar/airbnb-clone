@@ -31,7 +31,7 @@ export default function ReviewsSection({
     async function loadReviews() {
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/listings/${listingId}/reviews`
+          `${process.env.NEXT_PUBLIC_API_URL}/listings/${listingId}/reviews`
         );
 
         if (!response.ok) {
@@ -72,7 +72,7 @@ export default function ReviewsSection({
     setSuccess(false);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/reviews", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/reviews`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

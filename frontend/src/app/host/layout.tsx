@@ -33,7 +33,7 @@ export default function HostLayout({
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/auth/me",
+          `${process.env.NEXT_PUBLIC_API_URL}/auth/me`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
