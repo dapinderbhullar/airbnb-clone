@@ -3,6 +3,13 @@ from datetime import datetime, timedelta, timezone
 import os
 from dotenv import load_dotenv
 
+load_dotenv()
+FRONTEND_URL = os.getenv(
+    "FRONTEND_URL",
+    "http://localhost:3000",
+)
+
+
 import jwt
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
@@ -30,10 +37,6 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Airbnb Clone API")
 
-FRONTEND_URL = os.getenv(
-    "FRONTEND_URL",
-    "http://localhost:3000",
-)
 
 app.add_middleware(
     CORSMiddleware,
@@ -47,7 +50,6 @@ app.add_middleware(
 password_hash = PasswordHash.recommended()
 security = HTTPBearer()
 
-load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY")
 if not SECRET_KEY:
     raise RuntimeError("SECRET_KEY is missing from backend/.env")
